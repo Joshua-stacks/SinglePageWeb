@@ -63,7 +63,7 @@ function App() {
     <>
       <header className="header">
         <div className="header-content">
-          <h1>🧮 Tax Tools</h1>
+          <h1>🧮 Chateau D'ivoire Hub</h1>
         </div>
       </header>
 
