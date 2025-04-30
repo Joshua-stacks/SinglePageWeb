@@ -61,11 +61,11 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h2>Canada Tax Calculator</h2>
 
         <label>
-          Select Province:{" "}
+          Province:
           <select
             value={province}
             onChange={(e) => setProvince(e.target.value as Province)}
@@ -83,7 +83,6 @@ function App() {
           </select>
         </label>
 
-        <br />
         <input
           type="number"
           placeholder="Enter amount"
@@ -92,28 +91,32 @@ function App() {
         />
 
         {total !== null && (
-          <div>
+          <div className="result">
             <p>
-              <strong>{taxRates[province].label}:</strong>
+              <strong>{taxRates[province].label}</strong>
             </p>
             <p>
               GST/HST: $
-              {gst!.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-}
+              {gst!.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </p>
             {taxRates[province].pst > 0 && (
               <p>
                 PST/QST: $
-                {pst!.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-}
+                {pst!.toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
               </p>
             )}
-            <p>
-              <strong>
-                Total with taxes: $
-                {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-}
-              </strong>
+            <p className="total">
+              Total: $
+              {total.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
             </p>
           </div>
         )}
