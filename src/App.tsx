@@ -61,6 +61,12 @@ function App() {
 
   return (
     <>
+      <header className="header">
+        <div className="header-content">
+          <h1>🧮 Tax Tools</h1>
+        </div>
+      </header>
+
       <div className="container">
         <h2>Canada Tax Calculator</h2>
 
@@ -91,7 +97,7 @@ function App() {
         />
 
         {total !== null && (
-          <div className="result">
+          <div className="result fade-in">
             <p>
               <strong>{taxRates[province].label}</strong>
             </p>
@@ -123,7 +129,7 @@ function App() {
       </div>
 
       <section>
-        <h2>Daily Tasks</h2>
+        <h2>🛠️ Daily Tasks</h2>
         <ul>
           <li>
             <a href="https://form.jotform.com/231564559832262">
@@ -139,7 +145,7 @@ function App() {
       </section>
 
       <section>
-        <h2>Warranty + Purchase</h2>
+        <h2>📦 Warranty + Purchase</h2>
         <ul>
           <li>
             <a href="https://form.jotform.com/250455957815265">KYC Form</a>
@@ -154,7 +160,7 @@ function App() {
       </section>
 
       <section>
-        <h2>Inquiry + Purchases</h2>
+        <h2>💍 Inquiry + Purchases</h2>
         <ul>
           <li>
             <a href="https://form.jotform.com/213426593347056">
