@@ -1,8 +1,124 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
+type Province =
+  | "QC"
+  | "ON"
+  | "BC"
+  | "AB"
+  | "MB"
+  | "SK"
+  | "NS"
+  | "NB"
+  | "NL"
+  | "PE";
+
+interface TaxInfo {
+  gst: number;
+  pst: number;
+  label: string;
+}
+
+const taxRates: Record<Province, TaxInfo> = {
+  QC: { gst: 0.05, pst: 0.09975, label: "GST + QST" },
+  ON: { gst: 0.13, pst: 0, label: "HST" },
+  BC: { gst: 0.05, pst: 0.07, label: "GST + PST" },
+  AB: { gst: 0.05, pst: 0, label: "GST only" },
+  MB: { gst: 0.05, pst: 0.07, label: "GST + PST" },
+  SK: { gst: 0.05, pst: 0.06, label: "GST + PST" },
+  NS: { gst: 0.15, pst: 0, label: "HST" },
+  NB: { gst: 0.15, pst: 0, label: "HST" },
+  NL: { gst: 0.15, pst: 0, label: "HST" },
+  PE: { gst: 0.15, pst: 0, label: "HST" },
+};
+
 function App() {
+  const [price, setPrice] = useState<string>("");
+  const [province, setProvince] = useState<Province>("QC");
+  const [gst, setGst] = useState<number | null>(null);
+  const [pst, setPst] = useState<number | null>(null);
+  const [total, setTotal] = useState<number | null>(null);
+
+  useEffect(() => {
+    const amount = parseFloat(price);
+    if (isNaN(amount)) {
+      setGst(null);
+      setPst(null);
+      setTotal(null);
+      return;
+    }
+
+    const { gst: gstRate, pst: pstRate } = taxRates[province];
+
+    const gstAmount = amount * gstRate;
+    const pstAmount = amount * pstRate;
+    const totalWithTax = amount + gstAmount + pstAmount;
+
+    setGst(gstAmount);
+    setPst(pstAmount);
+    setTotal(totalWithTax);
+  }, [price, province]);
+
   return (
     <>
+      <div>
+        <h2>Canada Tax Calculator</h2>
+
+        <label>
+          Select Province:{" "}
+          <select
+            value={province}
+            onChange={(e) => setProvince(e.target.value as Province)}
+          >
+            <option value="QC">Quebec</option>
+            <option value="ON">Ontario</option>
+            <option value="BC">British Columbia</option>
+            <option value="AB">Alberta</option>
+            <option value="MB">Manitoba</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland & Labrador</option>
+            <option value="PE">Prince Edward Island</option>
+          </select>
+        </label>
+
+        <br />
+        <input
+          type="number"
+          placeholder="Enter amount"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+        />
+
+        {total !== null && (
+          <div>
+            <p>
+              <strong>{taxRates[province].label}:</strong>
+            </p>
+            <p>
+              GST/HST: $
+              {gst!.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+            </p>
+            {taxRates[province].pst > 0 && (
+              <p>
+                PST/QST: $
+                {pst!.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+              </p>
+            )}
+            <p>
+              <strong>
+                Total with taxes: $
+                {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+}
+              </strong>
+            </p>
+          </div>
+        )}
+      </div>
+
       <div>
         <h2>Daily Tasks</h2>
         <ul>
@@ -18,6 +134,7 @@ function App() {
           </li>
         </ul>
       </div>
+
       <div>
         <h2>Warranty + Purchase</h2>
         <ul>
@@ -25,10 +142,14 @@ function App() {
             <a href="https://form.jotform.com/250455957815265">KYC Form</a>
           </li>
           <li>
-            <a href="https://richemontb2c.b2clogin.com/richemontb2c.onmicrosoft.com/oauth2/v2.0/authorize?client_id=6e3015fa-71c5-4c93-aa6d-7eeaf6bf014a&p=B2C_1A_RIC-COMBINEDSIGNIN&redirect_uri=https%3A%2F%2Fbooster-richemont.my.salesforce.com%2Fservices%2Fauthcallback%2FAzureB2C&response_type=code&scope=openid+profile+email+offline_access+https%3A%2F%2Frichemontb2c.onmicrosoft.com%2F8b6e634f-d1c2-4cd9-b280-091343351d32%2FAccess&state=CAAAAZaIR7BcMDAwMDAwMDAwMDAwMDAwAAAA_q_eEFyIzkUJnnv7U-VqBzBIoSZ3jZgJ5QfWDFK_bAampsHCYL4Monb3wOrJNMNd8bkANBTNG3UnsgCpmtFsFWlFlKLZHJ8FWG9wKoMqRhssPxVbdQN48ccymZkyKeqWxSkFXRrZIqxP9h1MmvE-Em9VofNNugJ4h5XcRHLGPg5ZfKNKGVTfZ7NH6jEzaM4SRpZFJmYgrcUe0OzZlA8qHJMj0V3eCZsblrm1Pc0dBw-B6QZmTaYFw7C-UoxPFOZHaUcolOGWx9ERKPPDoMioYhY%3D">Richemont Warranty (Cartier, IWC, Panarai, Piaget, JLC, Baume & Mercier)</a>
+            <a href="https://richemontb2c.b2clogin.com/...">
+              Richemont Warranty (Cartier, IWC, Panarai, Piaget, JLC, Baume &
+              Mercier)
+            </a>
           </li>
         </ul>
       </div>
+
       <div>
         <h2>Inquiry + purchases</h2>
         <ul>
@@ -54,7 +175,7 @@ function App() {
           </li>
           <li>
             <a href="https://form.jotform.com/232905181275254">
-              Engagement Ring Quote Reques
+              Engagement Ring Quote Request
             </a>
           </li>
         </ul>
