@@ -122,7 +122,7 @@ function App() {
         )}
       </div>
 
-      <div>
+      <section>
         <h2>Daily Tasks</h2>
         <ul>
           <li>
@@ -136,9 +136,9 @@ function App() {
             </a>
           </li>
         </ul>
-      </div>
+      </section>
 
-      <div>
+      <section>
         <h2>Warranty + Purchase</h2>
         <ul>
           <li>
@@ -151,10 +151,10 @@ function App() {
             </a>
           </li>
         </ul>
-      </div>
+      </section>
 
-      <div>
-        <h2>Inquiry + purchases</h2>
+      <section>
+        <h2>Inquiry + Purchases</h2>
         <ul>
           <li>
             <a href="https://form.jotform.com/213426593347056">
@@ -182,7 +182,7 @@ function App() {
             </a>
           </li>
         </ul>
-      </div>
+      </section>
     </>
   );
 }
