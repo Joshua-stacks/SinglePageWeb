@@ -1,10 +1,8 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+
 
   return (
     <>
@@ -20,6 +18,14 @@ function App() {
             <a href="https://submit.jotform.com/231506304261242">
               Inventory Count
             </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Warranty + Purchase</h2>
+        <ul>
+          <li>
+            <a href="https://form.jotform.com/250455957815265">KYC Form</a>
           </li>
         </ul>
       </div>
