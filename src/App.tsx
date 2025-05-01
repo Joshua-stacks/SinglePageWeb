@@ -72,7 +72,6 @@ function App() {
             <svg
               width="24"
               height="32"
-              
               viewBox="0 0 81 111"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -197,6 +196,20 @@ function App() {
 
       <CollapsibleSection title="📅 Weekly Rotation">
         <WeeklyRotation />
+      </CollapsibleSection>
+
+      <CollapsibleSection title="🗓️ Store Calendar">
+        <div className="calendar-embed">
+          <iframe
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTz=0&showTabs=0&showTitle=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23795548&color=%230B8043"
+            width="100%"
+            height="600"
+            frameBorder="0"
+            scrolling="no"
+            style={{ borderWidth: 0, borderRadius: "12px" }}
+            title="Château Calendar"
+          ></iframe>
+        </div>
       </CollapsibleSection>
 
       <CollapsibleSection title="🛠️ Daily Tasks">

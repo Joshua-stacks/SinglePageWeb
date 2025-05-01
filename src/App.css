@@ -400,3 +400,9 @@ ul a:hover {
     padding: 14px 16px;
   }
 }
+.calendar-embed iframe {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
