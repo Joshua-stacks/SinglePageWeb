@@ -406,3 +406,41 @@ ul a:hover {
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
+.rotation-table {
+  max-width: 90%;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.rotation-table h2.zone-header {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #333;
+}
+
+.rotation-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rotation-table th,
+.rotation-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+}
+
+.rotation-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.first-column {
+  font-weight: bold;
+}

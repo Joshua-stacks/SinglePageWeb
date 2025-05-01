@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import WeeklyRotation from "./WeeklyRotation";
+import TodaysEvents from "./TodaysEvents";
+import MonthlyZones from "./MonthlyZones";
 import "./App.css";
-
 
 function CollapsibleSection({
   title,
@@ -199,6 +200,7 @@ function App() {
       </CollapsibleSection>
 
       <CollapsibleSection title="🗓️ Store Calendar">
+        <TodaysEvents />
         <div className="calendar-embed">
           <iframe
             src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTz=0&showTabs=0&showTitle=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23795548&color=%230B8043"
@@ -225,6 +227,9 @@ function App() {
             </a>
           </li>
         </ul>
+      </CollapsibleSection>
+      <CollapsibleSection title="🗂️ Monthly Zone Assignments">
+        <MonthlyZones />
       </CollapsibleSection>
 
       <CollapsibleSection title="📦 Warranty + Purchase">
