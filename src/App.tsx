@@ -151,7 +151,7 @@ function App() {
             <a href="https://form.jotform.com/250455957815265">KYC Form</a>
           </li>
           <li>
-            <a href="https://richemontb2c.b2clogin.com/...">
+            <a href="https://booster2.richemont.com/">
               Richemont Warranty (Cartier, IWC, Panarai, Piaget, JLC, Baume &
               Mercier)
             </a>
