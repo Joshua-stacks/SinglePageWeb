@@ -158,9 +158,13 @@ function App() {
           </li>
           <li>
             <a
-              href="https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="warranty://"
+              onClick={() => {
+                setTimeout(() => {
+                  window.location.href =
+                    "https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827";
+                }, 1000);
+              }}
             >
               📱 Open Ω Warranty App
             </a>
