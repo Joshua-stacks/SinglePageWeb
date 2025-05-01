@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import WeeklyRotation from "./WeeklyRotation";
 import "./App.css";
 
 type Province =
@@ -148,7 +149,7 @@ function App() {
           </div>
         )}
       </div>
-
+        <WeeklyRotation />
       <section>
         <h2>🛠️ Daily Tasks</h2>
         <ul>
@@ -218,16 +219,6 @@ function App() {
             </a>
           </li>
         </ul>
-      </section>
-      <section className="rotation-widget">
-        <h2>📅 Weekly Rotation</h2>
-        <iframe
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQTZhKoQLvOOU-7FJmsFgVyzfPaZXu5W29VrkpfmP9QK3nCCOBeRT2p8aoVp3w4R0N73JqoqXy9zzIF/pubhtml?widget=true&amp;headers=false"
-          width="100%"
-          height="300"
-          frameBorder="0"
-          title="Weekly Rotation"
-        ></iframe>
       </section>
     </>
   );
