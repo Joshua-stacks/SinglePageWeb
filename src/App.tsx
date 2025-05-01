@@ -2,40 +2,32 @@ import { useEffect, useState } from "react";
 import WeeklyRotation from "./WeeklyRotation";
 import "./App.css";
 
-type Province =
-  | "QC"
-  | "ON"
-  | "BC"
-  | "AB"
-  | "MB"
-  | "SK"
-  | "NS"
-  | "NB"
-  | "NL"
-  | "PE";
 
-interface TaxInfo {
-  gst: number;
-  pst: number;
-  label: string;
+function CollapsibleSection({
+  title,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <section className="collapsible-section">
+      <div className="collapsible-header" onClick={() => setOpen(!open)}>
+        {title}
+        <span className={`collapsible-icon ${open ? "open" : ""}`}>▶</span>
+      </div>
+      {open && <div className="collapsible-content">{children}</div>}
+    </section>
+  );
 }
-
-const taxRates: Record<Province, TaxInfo> = {
-  QC: { gst: 0.05, pst: 0.09975, label: "GST + QST" },
-  ON: { gst: 0.13, pst: 0, label: "HST" },
-  BC: { gst: 0.05, pst: 0.07, label: "GST + PST" },
-  AB: { gst: 0.05, pst: 0, label: "GST only" },
-  MB: { gst: 0.05, pst: 0.07, label: "GST + PST" },
-  SK: { gst: 0.05, pst: 0.06, label: "GST + PST" },
-  NS: { gst: 0.15, pst: 0, label: "HST" },
-  NB: { gst: 0.15, pst: 0, label: "HST" },
-  NL: { gst: 0.15, pst: 0, label: "HST" },
-  PE: { gst: 0.15, pst: 0, label: "HST" },
-};
 
 function App() {
   const [price, setPrice] = useState<string>("");
-  const [province, setProvince] = useState<Province>("QC");
+  const [province, setProvince] = useState("QC");
   const [gst, setGst] = useState<number | null>(null);
   const [pst, setPst] = useState<number | null>(null);
   const [total, setTotal] = useState<number | null>(null);
@@ -49,8 +41,20 @@ function App() {
       return;
     }
 
-    const { gst: gstRate, pst: pstRate } = taxRates[province];
+    const taxRates: any = {
+      QC: { gst: 0.05, pst: 0.09975, label: "GST + QST" },
+      ON: { gst: 0.13, pst: 0, label: "HST" },
+      BC: { gst: 0.05, pst: 0.07, label: "GST + PST" },
+      AB: { gst: 0.05, pst: 0, label: "GST only" },
+      MB: { gst: 0.05, pst: 0.07, label: "GST + PST" },
+      SK: { gst: 0.05, pst: 0.06, label: "GST + PST" },
+      NS: { gst: 0.15, pst: 0, label: "HST" },
+      NB: { gst: 0.15, pst: 0, label: "HST" },
+      NL: { gst: 0.15, pst: 0, label: "HST" },
+      PE: { gst: 0.15, pst: 0, label: "HST" },
+    };
 
+    const { gst: gstRate, pst: pstRate } = taxRates[province];
     const gstAmount = amount * gstRate;
     const pstAmount = amount * pstRate;
     const totalWithTax = amount + gstAmount + pstAmount;
@@ -64,7 +68,70 @@ function App() {
     <>
       <header className="header">
         <div className="header-content">
-          <h1>🧮 Tax Tools</h1>
+          <h1>
+            <svg
+              width="24"
+              height="32"
+              
+              viewBox="0 0 81 111"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clipPath="url(#clip0)">
+                <g clipPath="url(#clip1)">
+                  <path
+                    d="M21.6696 89.5918H0V111H21.6696V89.5918Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M21.6696 60.3784H0V81.7866H21.6696V60.3784Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M21.6696 31.165H0V52.5545H21.6696V31.165Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M51.3347 89.5918H29.665V111H51.3347V89.5918Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M51.3347 60.3784H29.665V81.7866H51.3347V60.3784Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M81.0002 89.5918H59.3306V111H81.0002V89.5918Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M81.0002 60.3784H59.3306V81.7866H81.0002V60.3784Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M81.0002 31.165H59.3306V52.5545H81.0002V31.165Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M0.151855 23.2094L10.8822 0L21.6126 23.2094H0.151855Z"
+                    fill="#907843"
+                  />
+                  <path
+                    d="M59.5391 23.2094L70.2504 0L80.9998 23.2094H59.5391Z"
+                    fill="#907843"
+                  />
+                </g>
+              </g>
+              <defs>
+                <clipPath id="clip0">
+                  <rect width="81" height="111" fill="white" />
+                </clipPath>
+                <clipPath id="clip1">
+                  <rect width="81" height="111" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+            The Chateau Hub
+          </h1>
         </div>
       </header>
 
@@ -91,12 +158,11 @@ function App() {
 
       <div className="container">
         <h2>Canada Tax Calculator</h2>
-
         <label>
           Province:
           <select
             value={province}
-            onChange={(e) => setProvince(e.target.value as Province)}
+            onChange={(e) => setProvince(e.target.value)}
           >
             <option value="QC">Quebec</option>
             <option value="ON">Ontario</option>
@@ -110,7 +176,6 @@ function App() {
             <option value="PE">Prince Edward Island</option>
           </select>
         </label>
-
         <input
           type="number"
           placeholder="Enter amount"
@@ -121,37 +186,20 @@ function App() {
         {total !== null && (
           <div className="result fade-in">
             <p>
-              <strong>{taxRates[province].label}</strong>
+              <strong>{province}</strong>
             </p>
-            <p>
-              GST/HST: $
-              {gst!.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </p>
-            {taxRates[province].pst > 0 && (
-              <p>
-                PST/QST: $
-                {pst!.toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </p>
-            )}
-            <p className="total">
-              Total: $
-              {total.toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </p>
+            <p>GST/HST: ${gst!.toFixed(2)}</p>
+            {pst! > 0 && <p>PST/QST: ${pst!.toFixed(2)}</p>}
+            <p className="total">Total: ${total!.toFixed(2)}</p>
           </div>
         )}
       </div>
+
+      <CollapsibleSection title="📅 Weekly Rotation">
         <WeeklyRotation />
-      <section>
-        <h2>🛠️ Daily Tasks</h2>
+      </CollapsibleSection>
+
+      <CollapsibleSection title="🛠️ Daily Tasks">
         <ul>
           <li>
             <a href="https://form.jotform.com/231564559832262">
@@ -164,18 +212,16 @@ function App() {
             </a>
           </li>
         </ul>
-      </section>
+      </CollapsibleSection>
 
-      <section>
-        <h2>📦 Warranty + Purchase</h2>
+      <CollapsibleSection title="📦 Warranty + Purchase">
         <ul>
           <li>
             <a href="https://form.jotform.com/250455957815265">KYC Form</a>
           </li>
           <li>
             <a href="https://booster2.richemont.com/">
-              Richemont Warranty (Cartier, IWC, Panarai, Piaget, JLC, Baume &
-              Mercier)
+              Richemont Warranty (Cartier, IWC, etc.)
             </a>
           </li>
           <li>
@@ -188,10 +234,9 @@ function App() {
             </a>
           </li>
         </ul>
-      </section>
+      </CollapsibleSection>
 
-      <section>
-        <h2>💍 Inquiry + Purchases</h2>
+      <CollapsibleSection title="💍 Inquiry + Purchases">
         <ul>
           <li>
             <a href="https://form.jotform.com/213426593347056">
@@ -219,7 +264,7 @@ function App() {
             </a>
           </li>
         </ul>
-      </section>
+      </CollapsibleSection>
     </>
   );
 }
