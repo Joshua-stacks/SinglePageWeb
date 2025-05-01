@@ -63,9 +63,30 @@ function App() {
     <>
       <header className="header">
         <div className="header-content">
-          <h1>🧮 Chateau D'ivoire Hub</h1>
+          <h1>🧮 Tax Tools</h1>
         </div>
       </header>
+
+      <section className="documents-section">
+        <h2>📄 Documents</h2>
+        <ul>
+          <li>
+            <a href="/documents/WireCADFrench.docx" download>
+              Wire Transfer CAD Francais (.docx)
+            </a>
+          </li>
+          <li>
+            <a href="/documents/WireCADEnglish.docx" download>
+              Wire Transfer CAD English (.docx)
+            </a>
+          </li>
+          <li>
+            <a href="/documents/WireUSD.docx" download>
+              Wire Transfer USD (.docx)
+            </a>
+          </li>
+        </ul>
+      </section>
 
       <div className="container">
         <h2>Canada Tax Calculator</h2>
@@ -197,6 +218,16 @@ function App() {
             </a>
           </li>
         </ul>
+      </section>
+      <section className="rotation-widget">
+        <h2>📅 Weekly Rotation</h2>
+        <iframe
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQTZhKoQLvOOU-7FJmsFgVyzfPaZXu5W29VrkpfmP9QK3nCCOBeRT2p8aoVp3w4R0N73JqoqXy9zzIF/pubhtml?widget=true&amp;headers=false"
+          width="100%"
+          height="300"
+          frameBorder="0"
+          title="Weekly Rotation"
+        ></iframe>
       </section>
     </>
   );
