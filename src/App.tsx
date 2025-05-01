@@ -156,6 +156,15 @@ function App() {
               Mercier)
             </a>
           </li>
+          <li>
+            <a
+              href="https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              📱 Open Ω Warranty App
+            </a>
+          </li>
         </ul>
       </section>
 
