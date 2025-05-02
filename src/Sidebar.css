@@ -1,16 +1,17 @@
 .sidebar {
   position: sticky;
-  top: 20px;
-  left: 0;
-  padding: 16px;
+  top: 80px;
+  align-self: flex-start;
+  height: fit-content;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
   background: #fff;
-  border: 1px solid #ddd;
+  padding: 16px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  max-width: 200px;
-  margin: 20px;
-  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 220px;
 }
+
 
 .sidebar ul {
   list-style: none;

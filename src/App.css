@@ -34,7 +34,8 @@ body {
 .documents-section {
   position: absolute;
   top: 80px;
-  left: 20px;
+  right: 20px;
+  left: auto; /* cancel out left */
   background: white;
   padding: 12px 16px;
   border-radius: 8px;
@@ -42,6 +43,7 @@ body {
   width: max-content;
   z-index: 500;
 }
+
 
 /* Mobile-friendly override */
 @media (max-width: 768px) {
