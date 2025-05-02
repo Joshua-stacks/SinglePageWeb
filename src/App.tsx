@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import WeeklyRotation from "./WeeklyRotation";
-import TodaysEvents from "./TodaysEvents";
 import MonthlyZones from "./MonthlyZones";
 import Sidebar from "./Sidebar";
 
@@ -204,15 +203,14 @@ function App() {
             </CollapsibleSection>
 
             <CollapsibleSection title="🗓️ Store Calendar">
-              <TodaysEvents />
               <div className="calendar-embed">
                 <iframe
-                  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTz=0&showTabs=0&showTitle=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23795548&color=%230B8043"
-                  width="100%"
+                  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTitle=0&showTabs=0&showTz=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MDZlYTlkZWYzODYwNDhiOTZhNTgyNjljOGQ5NDZkYTk1NDUyZmIxODIwMzVkNWNkNTVlMjU0MDA3ODFlMWVjMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzhmOTQwMzY5ZGY3MDI0Yzc0OWI4YTFlY2ZjZGRlYjAyNTIzZDczM2FjNWY5ZWJmZjhjMmI2NWJkODBlNzJlOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23C0CA33&color=%23D81B60&color=%23F09300&color=%230B8043"
+                  style={{ borderWidth: 0, borderRadius: "12px" }}
+                  width="800"
                   height="600"
                   frameBorder="0"
                   scrolling="no"
-                  style={{ borderWidth: 0, borderRadius: "12px" }}
                   title="Château Calendar"
                 ></iframe>
               </div>
