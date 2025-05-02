@@ -3,36 +3,44 @@ import "./App.css";
 
 const SHEET_ID = "1aMHuvLBb-A7ixcEvhZJKuUkB3QTnhwFzUKcZs6cYRYs";
 const API_KEY = "AIzaSyD4Aoz4ct02ctPQvHTCiBkh4cspPu8uwbo";
-const RANGE = "A3:D17"; // Includes headers and rows
+const RANGE = "A3:E17"; // Now includes 5 columns for start date
+const START_DATE_CELL = "E1";
 
 function MonthlyZones() {
   const [data, setData] = useState<string[][]>([]);
   const [month, setMonth] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   useEffect(() => {
     const fetchSheet = async () => {
       try {
-        // Get data table
+        // Table data
         const res = await fetch(
           `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`
         );
         const json = await res.json();
 
-        // Pad rows to have 4 columns (to account for empty cells)
         const paddedValues = (json.values || []).map((row: string[]) => {
           const newRow = [...row];
-          while (newRow.length < 4) newRow.push("");
+          while (newRow.length < 5) newRow.push("");
           return newRow;
         });
 
         setData(paddedValues);
 
-        // Get C1 (month selector)
+        // Month
         const monthRes = await fetch(
           `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/C1?key=${API_KEY}`
         );
         const monthJson = await monthRes.json();
         setMonth(monthJson.values?.[0]?.[0] || "");
+
+        // Start date
+        const startRes = await fetch(
+          `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${START_DATE_CELL}?key=${API_KEY}`
+        );
+        const startJson = await startRes.json();
+        setStartDate(startJson.values?.[0]?.[0] || "");
       } catch (err) {
         console.error("Failed to load sheet data", err);
       }
@@ -46,6 +54,20 @@ function MonthlyZones() {
   return (
     <div className="rotation-table">
       <h2 className="zone-header">📍 Monthly Zone Assignments – {month}</h2>
+      {startDate && (
+        <p style={{ fontWeight: "bold", marginBottom: "1rem", color: "#555" }}>
+          Start Date:{" "}
+          <span
+            style={{
+              background: "#f0f0f0",
+              padding: "4px 8px",
+              borderRadius: "6px",
+            }}
+          >
+            {startDate}
+          </span>
+        </p>
+      )}
       <div className="zone-instructions">
         <p>
           <strong>You're responsible to:</strong>

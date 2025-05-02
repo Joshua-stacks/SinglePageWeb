@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import WeeklyRotation from "./WeeklyRotation";
 import MonthlyZones from "./MonthlyZones";
-import Sidebar from "./Sidebar";
-
+import Announcements from "./Announcements";
 import "./App.css";
 
 function CollapsibleSection({
@@ -57,9 +56,10 @@ function App() {
     };
 
     const { gst: gstRate, pst: pstRate } = taxRates[province];
-    const gstAmount = amount * gstRate;
-    const pstAmount = amount * pstRate;
-    const totalWithTax = amount + gstAmount + pstAmount;
+    const gstAmount = Math.round(amount * gstRate * 100) / 100;
+    const pstAmount = Math.round(amount * pstRate * 100) / 100;
+    const totalWithTax =
+      Math.round((amount + gstAmount + pstAmount) * 100) / 100;
 
     setGst(gstAmount);
     setPst(pstAmount);
@@ -135,11 +135,13 @@ function App() {
           </h1>
         </div>
       </header>
+
       <div style={{ display: "flex", gap: "20px" }}>
-        <Sidebar />
+
         <main style={{ flex: 1 }}>
-          <section id="documents" className="documents-section">
-            <h2>📄 Documents</h2>
+          <Announcements />
+
+          <CollapsibleSection title="📄 Documents">
             <ul>
               <li>
                 <a href="/documents/WireCADFrench.docx" download>
@@ -157,7 +159,7 @@ function App() {
                 </a>
               </li>
             </ul>
-          </section>
+          </CollapsibleSection>
 
           <section id="calculator" className="container">
             <h2>Canada Tax Calculator</h2>
@@ -197,106 +199,94 @@ function App() {
             )}
           </section>
 
-          <section id="calendar">
-            <CollapsibleSection title="📅 Weekly Rotation">
-              <WeeklyRotation />
-            </CollapsibleSection>
+          <CollapsibleSection title="📅 Weekly Rotation">
+            <WeeklyRotation />
+          </CollapsibleSection>
 
-            <CollapsibleSection title="🗓️ Store Calendar">
-              <div className="calendar-embed">
-                <iframe
-                  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTitle=0&showTabs=0&showTz=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MDZlYTlkZWYzODYwNDhiOTZhNTgyNjljOGQ5NDZkYTk1NDUyZmIxODIwMzVkNWNkNTVlMjU0MDA3ODFlMWVjMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzhmOTQwMzY5ZGY3MDI0Yzc0OWI4YTFlY2ZjZGRlYjAyNTIzZDczM2FjNWY5ZWJmZjhjMmI2NWJkODBlNzJlOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23C0CA33&color=%23D81B60&color=%23F09300&color=%230B8043"
-                  style={{ borderWidth: 0, borderRadius: "12px" }}
-                  width="800"
-                  height="600"
-                  frameBorder="0"
-                  scrolling="no"
-                  title="Château Calendar"
-                ></iframe>
-              </div>
-            </CollapsibleSection>
-          </section>
+          <CollapsibleSection title="🗓️ Store Calendar">
+            <div className="calendar-embed">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTitle=0&showTabs=0&showTz=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MDZlYTlkZWYzODYwNDhiOTZhNTgyNjljOGQ5NDZkYTk1NDUyZmIxODIwMzVkNWNkNTVlMjU0MDA3ODFlMWVjMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=NzhmOTQwMzY5ZGY3MDI0Yzc0OWI4YTFlY2ZjZGRlYjAyNTIzZDczM2FjNWY5ZWJmZjhjMmI2NWJkODBlNzJlOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23C0CA33&color=%23D81B60&color=%23F09300&color=%230B8043"
+                style={{ borderWidth: 0, borderRadius: "12px" }}
+                width="800"
+                height="600"
+                frameBorder="0"
+                scrolling="no"
+                title="Château Calendar"
+              ></iframe>
+            </div>
+          </CollapsibleSection>
 
-          <section id="tasks">
-            <CollapsibleSection title="🛠️ Daily Tasks">
-              <ul>
-                <li>
-                  <a href="https://form.jotform.com/231564559832262">
-                    Inventory Adjustment form
-                  </a>
-                </li>
-                <li>
-                  <a href="https://submit.jotform.com/231506304261242">
-                    Inventory Count
-                  </a>
-                </li>
-              </ul>
-            </CollapsibleSection>
-          </section>
+          <CollapsibleSection title="🛠️ Daily Tasks">
+            <ul>
+              <li>
+                <a href="https://form.jotform.com/231564559832262">
+                  Inventory Adjustment form
+                </a>
+              </li>
+              <li>
+                <a href="https://submit.jotform.com/231506304261242">
+                  Inventory Count
+                </a>
+              </li>
+            </ul>
+          </CollapsibleSection>
 
-          <section id="zones">
-            <CollapsibleSection title="🗂️ Monthly Zone Assignments">
-              <MonthlyZones />
-            </CollapsibleSection>
-          </section>
+          <CollapsibleSection title="🗂️ Monthly Zone Assignments">
+            <MonthlyZones />
+          </CollapsibleSection>
 
-          <section id="warranty">
-            <CollapsibleSection title="📦 Warranty + Purchase">
-              <ul>
-                <li>
-                  <a href="https://form.jotform.com/250455957815265">
-                    KYC Form
-                  </a>
-                </li>
-                <li>
-                  <a href="https://booster2.richemont.com/">
-                    Richemont Warranty (Cartier, IWC, etc.)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    📱 Open Omega Warranty App
-                  </a>
-                </li>
-              </ul>
-            </CollapsibleSection>
-          </section>
+          <CollapsibleSection title="📦 Warranty + Purchase">
+            <ul>
+              <li>
+                <a href="https://form.jotform.com/250455957815265">KYC Form</a>
+              </li>
+              <li>
+                <a href="https://booster2.richemont.com/">
+                  Richemont Warranty (Cartier, IWC, etc.)
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  📱 Open Omega Warranty App
+                </a>
+              </li>
+            </ul>
+          </CollapsibleSection>
 
-          <section id="purchases">
-            <CollapsibleSection title="💍 Inquiry + Purchases">
-              <ul>
-                <li>
-                  <a href="https://form.jotform.com/213426593347056">
-                    Online Payment Request Form
-                  </a>
-                </li>
-                <li>
-                  <a href="https://form.jotform.com/91535549597271">
-                    Sales Inquiry/Order Form
-                  </a>
-                </li>
-                <li>
-                  <a href="https://form.jotform.com/91545011606247">
-                    Strap Inquiry/Order Form
-                  </a>
-                </li>
-                <li>
-                  <a href="https://form.jotform.com/222865958155065">
-                    Rolex Request Form
-                  </a>
-                </li>
-                <li>
-                  <a href="https://form.jotform.com/232905181275254">
-                    Engagement Ring Quote Request
-                  </a>
-                </li>
-              </ul>
-            </CollapsibleSection>
-          </section>
+          <CollapsibleSection title="💍 Inquiry">
+            <ul>
+              <li>
+                <a href="https://form.jotform.com/213426593347056">
+                  Online Payment Request Form
+                </a>
+              </li>
+              <li>
+                <a href="https://form.jotform.com/91535549597271">
+                  Sales Inquiry/Order Form
+                </a>
+              </li>
+              <li>
+                <a href="https://form.jotform.com/91545011606247">
+                  Strap Inquiry/Order Form
+                </a>
+              </li>
+              <li>
+                <a href="https://form.jotform.com/222865958155065">
+                  Rolex Request Form
+                </a>
+              </li>
+              <li>
+                <a href="https://form.jotform.com/232905181275254">
+                  Engagement Ring Quote Request
+                </a>
+              </li>
+            </ul>
+          </CollapsibleSection>
         </main>
       </div>
     </>

@@ -17,27 +17,27 @@ function WeeklyRotation() {
   return (
     <section className="rotation-table">
       <h2>📅 Weekly Rotation</h2>
-      {rows.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              {rows[0].map((header, index) => (
-                <th key={index}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.slice(1).map((row, i) => (
-              <tr key={i}>
-                {row.map((cell, j) => (
-                  <td key={j} className={j === 0 ? "first-column" : ""}>
-                    {cell}
-                  </td>
+      {rows.length > 1 ? (
+        <div className="rotation-table-wrapper">
+          <table className="styled-table">
+            <thead>
+              <tr>
+                {rows[0].map((header, index) => (
+                  <th key={index}>{header}</th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rows.slice(1).map((row, i) => (
+                <tr key={i}>
+                  {row.map((cell, j) => (
+                    <td key={j}>{cell || "—"}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
