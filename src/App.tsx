@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import WeeklyRotation from "./WeeklyRotation";
 import TodaysEvents from "./TodaysEvents";
 import MonthlyZones from "./MonthlyZones";
+import Sidebar from "./Sidebar";
+
 import "./App.css";
 
 function CollapsibleSection({
@@ -134,155 +136,171 @@ function App() {
           </h1>
         </div>
       </header>
+      <div style={{ display: "flex", gap: "20px" }}>
+        <Sidebar />
+        <main style={{ flex: 1 }}>
+          <section id="documents" className="documents-section">
+            <h2>📄 Documents</h2>
+            <ul>
+              <li>
+                <a href="/documents/WireCADFrench.docx" download>
+                  Wire Transfer CAD Francais (.docx)
+                </a>
+              </li>
+              <li>
+                <a href="/documents/WireCADEnglish.docx" download>
+                  Wire Transfer CAD English (.docx)
+                </a>
+              </li>
+              <li>
+                <a href="/documents/WireUSD.docx" download>
+                  Wire Transfer USD (.docx)
+                </a>
+              </li>
+            </ul>
+          </section>
 
-      <section className="documents-section">
-        <h2>📄 Documents</h2>
-        <ul>
-          <li>
-            <a href="/documents/WireCADFrench.docx" download>
-              Wire Transfer CAD Francais (.docx)
-            </a>
-          </li>
-          <li>
-            <a href="/documents/WireCADEnglish.docx" download>
-              Wire Transfer CAD English (.docx)
-            </a>
-          </li>
-          <li>
-            <a href="/documents/WireUSD.docx" download>
-              Wire Transfer USD (.docx)
-            </a>
-          </li>
-        </ul>
-      </section>
+          <section id="calculator" className="container">
+            <h2>Canada Tax Calculator</h2>
+            <label>
+              Province:
+              <select
+                value={province}
+                onChange={(e) => setProvince(e.target.value)}
+              >
+                <option value="QC">Quebec</option>
+                <option value="ON">Ontario</option>
+                <option value="BC">British Columbia</option>
+                <option value="AB">Alberta</option>
+                <option value="MB">Manitoba</option>
+                <option value="SK">Saskatchewan</option>
+                <option value="NS">Nova Scotia</option>
+                <option value="NB">New Brunswick</option>
+                <option value="NL">Newfoundland & Labrador</option>
+                <option value="PE">Prince Edward Island</option>
+              </select>
+            </label>
+            <input
+              type="number"
+              placeholder="Enter amount"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+            {total !== null && (
+              <div className="result fade-in">
+                <p>
+                  <strong>{province}</strong>
+                </p>
+                <p>GST/HST: ${gst!.toFixed(2)}</p>
+                {pst! > 0 && <p>PST/QST: ${pst!.toFixed(2)}</p>}
+                <p className="total">Total: ${total!.toFixed(2)}</p>
+              </div>
+            )}
+          </section>
 
-      <div className="container">
-        <h2>Canada Tax Calculator</h2>
-        <label>
-          Province:
-          <select
-            value={province}
-            onChange={(e) => setProvince(e.target.value)}
-          >
-            <option value="QC">Quebec</option>
-            <option value="ON">Ontario</option>
-            <option value="BC">British Columbia</option>
-            <option value="AB">Alberta</option>
-            <option value="MB">Manitoba</option>
-            <option value="SK">Saskatchewan</option>
-            <option value="NS">Nova Scotia</option>
-            <option value="NB">New Brunswick</option>
-            <option value="NL">Newfoundland & Labrador</option>
-            <option value="PE">Prince Edward Island</option>
-          </select>
-        </label>
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+          <section id="calendar">
+            <CollapsibleSection title="📅 Weekly Rotation">
+              <WeeklyRotation />
+            </CollapsibleSection>
 
-        {total !== null && (
-          <div className="result fade-in">
-            <p>
-              <strong>{province}</strong>
-            </p>
-            <p>GST/HST: ${gst!.toFixed(2)}</p>
-            {pst! > 0 && <p>PST/QST: ${pst!.toFixed(2)}</p>}
-            <p className="total">Total: ${total!.toFixed(2)}</p>
-          </div>
-        )}
+            <CollapsibleSection title="🗓️ Store Calendar">
+              <TodaysEvents />
+              <div className="calendar-embed">
+                <iframe
+                  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTz=0&showTabs=0&showTitle=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23795548&color=%230B8043"
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  scrolling="no"
+                  style={{ borderWidth: 0, borderRadius: "12px" }}
+                  title="Château Calendar"
+                ></iframe>
+              </div>
+            </CollapsibleSection>
+          </section>
+
+          <section id="tasks">
+            <CollapsibleSection title="🛠️ Daily Tasks">
+              <ul>
+                <li>
+                  <a href="https://form.jotform.com/231564559832262">
+                    Inventory Adjustment form
+                  </a>
+                </li>
+                <li>
+                  <a href="https://submit.jotform.com/231506304261242">
+                    Inventory Count
+                  </a>
+                </li>
+              </ul>
+            </CollapsibleSection>
+          </section>
+
+          <section id="zones">
+            <CollapsibleSection title="🗂️ Monthly Zone Assignments">
+              <MonthlyZones />
+            </CollapsibleSection>
+          </section>
+
+          <section id="warranty">
+            <CollapsibleSection title="📦 Warranty + Purchase">
+              <ul>
+                <li>
+                  <a href="https://form.jotform.com/250455957815265">
+                    KYC Form
+                  </a>
+                </li>
+                <li>
+                  <a href="https://booster2.richemont.com/">
+                    Richemont Warranty (Cartier, IWC, etc.)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    📱 Open Omega Warranty App
+                  </a>
+                </li>
+              </ul>
+            </CollapsibleSection>
+          </section>
+
+          <section id="purchases">
+            <CollapsibleSection title="💍 Inquiry + Purchases">
+              <ul>
+                <li>
+                  <a href="https://form.jotform.com/213426593347056">
+                    Online Payment Request Form
+                  </a>
+                </li>
+                <li>
+                  <a href="https://form.jotform.com/91535549597271">
+                    Sales Inquiry/Order Form
+                  </a>
+                </li>
+                <li>
+                  <a href="https://form.jotform.com/91545011606247">
+                    Strap Inquiry/Order Form
+                  </a>
+                </li>
+                <li>
+                  <a href="https://form.jotform.com/222865958155065">
+                    Rolex Request Form
+                  </a>
+                </li>
+                <li>
+                  <a href="https://form.jotform.com/232905181275254">
+                    Engagement Ring Quote Request
+                  </a>
+                </li>
+              </ul>
+            </CollapsibleSection>
+          </section>
+        </main>
       </div>
-
-      <CollapsibleSection title="📅 Weekly Rotation">
-        <WeeklyRotation />
-      </CollapsibleSection>
-
-      <CollapsibleSection title="🗓️ Store Calendar">
-        <TodaysEvents />
-        <div className="calendar-embed">
-          <iframe
-            src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FToronto&showPrint=0&showTz=0&showTabs=0&showTitle=0&src=MTVhMzNjYjVlZTA2MGY2YzI0ZWI1YmE1YTM2YmVjYjRkZWJhOTdhOTQ1ZTcwMmNlZTYxZWNmYmQ2MmI5MGE3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uY2FuYWRpYW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23795548&color=%230B8043"
-            width="100%"
-            height="600"
-            frameBorder="0"
-            scrolling="no"
-            style={{ borderWidth: 0, borderRadius: "12px" }}
-            title="Château Calendar"
-          ></iframe>
-        </div>
-      </CollapsibleSection>
-
-      <CollapsibleSection title="🛠️ Daily Tasks">
-        <ul>
-          <li>
-            <a href="https://form.jotform.com/231564559832262">
-              Inventory Adjustment form
-            </a>
-          </li>
-          <li>
-            <a href="https://submit.jotform.com/231506304261242">
-              Inventory Count
-            </a>
-          </li>
-        </ul>
-      </CollapsibleSection>
-      <CollapsibleSection title="🗂️ Monthly Zone Assignments">
-        <MonthlyZones />
-      </CollapsibleSection>
-
-      <CollapsibleSection title="📦 Warranty + Purchase">
-        <ul>
-          <li>
-            <a href="https://form.jotform.com/250455957815265">KYC Form</a>
-          </li>
-          <li>
-            <a href="https://booster2.richemont.com/">
-              Richemont Warranty (Cartier, IWC, etc.)
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://apps.apple.com/ca/app/%CF%89-warranty/id1476821827"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              📱 Open Omega Warranty App
-            </a>
-          </li>
-        </ul>
-      </CollapsibleSection>
-
-      <CollapsibleSection title="💍 Inquiry + Purchases">
-        <ul>
-          <li>
-            <a href="https://form.jotform.com/213426593347056">
-              Online Payment Request Form
-            </a>
-          </li>
-          <li>
-            <a href="https://form.jotform.com/91535549597271">
-              Sales Inquiry/Order Form
-            </a>
-          </li>
-          <li>
-            <a href="https://form.jotform.com/91545011606247">
-              Strap Inquiry/Order Form
-            </a>
-          </li>
-          <li>
-            <a href="https://form.jotform.com/222865958155065">
-              Rolex Request Form
-            </a>
-          </li>
-          <li>
-            <a href="https://form.jotform.com/232905181275254">
-              Engagement Ring Quote Request
-            </a>
-          </li>
-        </ul>
-      </CollapsibleSection>
     </>
   );
 }
